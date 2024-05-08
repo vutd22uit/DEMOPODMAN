@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podman CI/CD Tutorial</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+        .container { width: 80%; margin: 20px auto; }
+        h1 { color: #333; }
+        code { background-color: #f4f4f4; padding: 2px 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Podman CI/CD Integration with GitHub Actions and Docker Hub</h1>
+        <h2>Setup</h2>
+        <ol>
+            <li><strong>Create a GitHub repository:</strong> Initialize a new repository and clone it to your local machine.</li>
+            <li><strong>Install Podman:</strong> Ensure Podman is installed on your local machine. Use <code>sudo apt install podman</code> on Ubuntu, or follow installation guides for other systems.</li>
+        </ol>
+
+        <h2>Configure GitHub Actions</h2>
+        <ol>
+            <li><strong>Create a GitHub Actions workflow:</strong> In your repository, create a directory called <code>.github/workflows</code> and add a YAML file for your CI/CD pipeline.</li>
+            <li><strong>Define the workflow:</strong> Set up steps to build, push the Docker image to Docker Hub, and notify you upon completion.</li>
+        </ol>
+
+        <h2>Docker Hub Setup</h2>
+        <ol>
+            <li><strong>Create Docker Hub account and repository:</strong> Sign up and create a new repository on Docker Hub where your Docker images will be stored.</li>
+            <li><strong>Configure secrets in GitHub:</strong> Add your Docker Hub username and password as secrets in your GitHub repository settings to use in your workflow.</li>
+        </ol>
+
+        <h2>Local Deployment Using Podman</h2>
+        <ol>
+            <li><strong>Pull the Docker image:</strong> Use Podman to pull the image from Docker Hub with <code>podman pull username/repo:tag</code>.</li>
+            <li><strong>Run the container:</strong> Start the container using <code>podman run -d --name my-container username/repo:tag</code>.</li>
+        </ol>
+
+        <footer>
+            <p>This tutorial provides a basic overview. For detailed configurations and advanced use, consult official documentation.</p>
+        </footer>
+    </div>
+</body>
+</html>
