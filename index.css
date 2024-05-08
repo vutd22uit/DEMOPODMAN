@@ -1,0 +1,62 @@
+/* Basic reset */
+body, h1, h2, ol, p {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f9;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    color: #333;
+}
+
+h1 {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    font-size: 24px;
+}
+
+h2 {
+    padding-top: 20px;
+    padding-bottom: 5px;
+    font-size: 20px;
+    color: #444;
+}
+
+ol {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+li {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+code {
+    background-color: #e3e6f0;
+    border-radius: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 3px 6px;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 14px;
+    text-align: center;
+    color: #666;
+}
