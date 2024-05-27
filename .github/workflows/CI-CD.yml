@@ -14,7 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install Podman
+      - name: Install Podman on GitHub Runner
         run: |
           sudo apt-get update
           sudo apt-get install -y podman
@@ -35,7 +35,22 @@ jobs:
           username: ec2-user
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
+            # Cài đặt Podman trên EC2 instance
+            sudo yum -y update
+            sudo yum -y install amazon-linux-extras
+            sudo amazon-linux-extras enable docker
+            sudo yum -y install docker
+            sudo systemctl start docker
+            sudo systemctl enable docker
+
+            # Cài đặt Podman
+            sudo amazon-linux-extras enable podman
+            sudo yum -y install podman
+
+            # Đăng nhập vào Docker Hub
             podman login docker.io -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
+
+            # Kéo và chạy container
             podman pull docker.io/${{ secrets.DOCKER_USERNAME }}/webapp:${{ github.sha }}
             podman stop webapp || true
             podman rm webapp || true
