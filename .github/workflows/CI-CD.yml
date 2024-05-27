@@ -14,20 +14,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Set up Podman
-        run: |
-          sudo apt-get update
-          sudo apt-get -y install podman
-
       - name: Build the Docker image
         run: |
-          podman build . --file Dockerfile --tag docker.io/${{ secrets.DOCKER_USERNAME }}/podman-demo:${GITHUB_SHA::7}
-          podman tag docker.io/${{ secrets.DOCKER_USERNAME }}/podman-demo:${GITHUB_SHA::7} docker.io/${{ secrets.DOCKER_USERNAME }}/podman-demo:latest
+          podman build . --file Dockerfile --tag docker.io/${{ secrets.DOCKER_USERNAME }}/podman-demo:${{ github.sha }}
+          podman tag docker.io/${{ secrets.DOCKER_USERNAME }}/podman-demo:${{ github.sha }} docker.io/${{ secrets.DOCKER_USERNAME }}/podman-demo:latest
 
       - name: Run Trivy vulnerability scanner
         run: |
           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
-          trivy image docker.io/${{ secrets.DOCKER_USERNAME }}/podman-demo:${GITHUB_SHA::7}
+          trivy image docker.io/${{ secrets.DOCKER_USERNAME }}/podman-demo:${{ github.sha }}
 
       - name: Log in to Docker Hub
         env:
@@ -38,7 +33,7 @@ jobs:
 
       - name: Push to Docker Hub
         run: |
-          podman push docker.io/${{ secrets.DOCKER_USERNAME }}/podman-demo:${GITHUB_SHA::7}
+          podman push docker.io/${{ secrets.DOCKER_USERNAME }}/podman-demo:${{ github.sha }}
           podman push docker.io/${{ secrets.DOCKER_USERNAME }}/podman-demo:latest
 
   deploy:
