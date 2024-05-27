@@ -35,14 +35,9 @@ jobs:
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_PRIVATE_KEY }}
           script: |
-            # Cài đặt Podman trên EC2 instance
             sudo apt-get update
             sudo apt-get install -y podman
-
-            # Đăng nhập vào Docker Hub
             podman login docker.io -u "${{ secrets.DOCKER_USERNAME }}" -p "${{ secrets.DOCKER_PASSWORD }}"
-
-            # Kéo và chạy container
             podman pull docker.io/${{ secrets.DOCKER_USERNAME }}/webapp:${{ github.sha }}
             podman stop webapp || true
             podman rm webapp || true
