@@ -1,62 +1,62 @@
-/* Basic reset */
-body, h1, h2, ol, p {
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
     margin: 0;
     padding: 0;
+    background-color: #f4f4f4;
 }
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background-color: #f4f4f9;
-    padding: 20px;
-}
-
 .container {
-    max-width: 800px;
+    width: 80%;
     margin: auto;
+    overflow: hidden;
     padding: 20px;
-    background: white;
+    background: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
-
 h1, h2 {
     color: #333;
 }
-
-h1 {
-    padding-top: 20px;
-    padding-bottom: 10px;
-    font-size: 24px;
-}
-
-h2 {
-    padding-top: 20px;
-    padding-bottom: 5px;
-    font-size: 20px;
-    color: #444;
-}
-
-ol {
-    margin-top: 10px;
-    padding-left: 20px;
-}
-
-li {
-    margin-bottom: 10px;
-    font-size: 16px;
-}
-
-code {
-    background-color: #e3e6f0;
+pre {
+    background: #333;
+    color: #fff;
+    padding: 10px;
+    overflow-x: auto;
     border-radius: 5px;
-    font-family: 'Courier New', Courier, monospace;
-    padding: 3px 6px;
 }
-
-footer {
-    margin-top: 20px;
-    font-size: 14px;
+code {
+    color: #c7254e;
+    background-color: #f9f2f4;
+    padding: 2px 4px;
+    border-radius: 4px;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+ul li {
+    background: #e2e2e2;
+    margin: 5px 0;
+    padding: 10px;
+    border-left: 5px solid #333;
+    border-radius: 5px;
+}
+header {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
     text-align: center;
-    color: #666;
+    margin-bottom: 20px;
+}
+header h1 {
+    margin: 0;
+}
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
