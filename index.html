@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo Podman với CI/CD bằng GitHub Actions</title>
+    <title>Podman Knowledge</title>
     <style>
         body {
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -11,11 +11,11 @@
             margin: 0;
             padding: 0;
             background-color: #f0f2f5;
-            color: #1c1e21;
+            color: #333;
         }
         .navbar {
-            background-color: #4267b2;
-            padding: 10px 20px;
+            background-color: #2c3e50;
+            padding: 15px 20px;
             color: white;
             display: flex;
             justify-content: space-between;
@@ -36,7 +36,7 @@
             border-radius: 10px;
         }
         h1, h2 {
-            color: #2e8b57;
+            color: #2980b9;
         }
         pre {
             background: #333;
@@ -56,14 +56,14 @@
             padding: 0;
         }
         ul li {
-            background: #f4f4f4;
+            background: #ecf0f1;
             margin: 10px 0;
             padding: 10px;
-            border-left: 5px solid #2e8b57;
+            border-left: 5px solid #2980b9;
             border-radius: 5px;
         }
         footer {
-            background: #4267b2;
+            background: #2c3e50;
             color: #fff;
             text-align: center;
             padding: 10px 0;
@@ -76,69 +76,66 @@
                 width: 95%;
             }
         }
+        .button {
+            background-color: #2980b9;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #1c598a;
+        }
     </style>
 </head>
 <body>
     <div class="navbar">
-        <h1>Demo Podman với CI/CD</h1>
+        <h1>Podman Knowledge</h1>
     </div>
     <div class="container">
-        <p>Hướng dẫn này sẽ giúp bạn thiết lập CI/CD bằng GitHub Actions để deploy ứng dụng Podman trên EC2.</p>
+        <h1>Welcome to Podman Knowledge</h1>
+        <p>This website provides comprehensive information and tutorials about Podman.</p>
         
-        <h2>Bước 1: Thiết lập Repository trên GitHub</h2>
-        <p>Tạo một repository mới trên GitHub hoặc sử dụng repository hiện tại.</p>
+        <h2>What is Podman?</h2>
+        <p>Podman is a daemonless container engine for developing, managing, and running OCI Containers on your Linux System. It was created to ease the transition from Docker and allows running rootless containers.</p>
+        
+        <h2>Getting Started with Podman</h2>
+        <ul>
+            <li><a href="#installation" class="button">Installation</a></li>
+            <li><a href="#basic-commands" class="button">Basic Commands</a></li>
+            <li><a href="#docker-compatibility" class="button">Docker Compatibility</a></li>
+            <li><a href="#advanced-features" class="button">Advanced Features</a></li>
+        </ul>
 
-        <h2>Bước 2: Viết Dockerfile cho ứng dụng Podman</h2>
-        <p>Tạo file <code>Dockerfile</code> trong thư mục gốc của dự án:</p>
-        <pre><code>FROM fedora:latest
-RUN dnf -y update && dnf -y install podman
-COPY . /app
-WORKDIR /app
-CMD ["podman", "run", "-p", "8080:80", "your-podman-image"]</code></pre>
+        <h2 id="installation">Installation</h2>
+        <p>Install Podman on your system using the following commands:</p>
+        <pre><code>sudo apt-get update
+sudo apt-get -y install podman</code></pre>
+        <p>For other distributions, refer to the official <a href="https://podman.io/getting-started/installation" target="_blank">Podman installation guide</a>.</p>
 
-        <h2>Bước 3: Tạo GitHub Actions Workflow</h2>
-        <p>Tạo thư mục <code>.github/workflows</code> trong dự án của bạn và tạo file <code>ci-cd.yml</code> với nội dung sau:</p>
-        <pre><code>name: CI/CD Pipeline
+        <h2 id="basic-commands">Basic Commands</h2>
+        <ul>
+            <li>Check Podman version: <code>podman --version</code></li>
+            <li>Pull an image: <code>podman pull IMAGE_NAME</code></li>
+            <li>Run a container: <code>podman run -d --name CONTAINER_NAME IMAGE_NAME</code></li>
+            <li>List running containers: <code>podman ps</code></li>
+            <li>Stop a container: <code>podman stop CONTAINER_NAME</code></li>
+        </ul>
 
-on:
-  push:
-    branches:
-      - main
+        <h2 id="docker-compatibility">Docker Compatibility</h2>
+        <p>Podman provides a Docker-compatible CLI called <code>podman-docker</code>. You can install it using:</p>
+        <pre><code>sudo apt-get -y install podman-docker</code></pre>
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Podman
-      run: |
-        sudo apt-get update
-        sudo apt-get -y install podman
-
-    - name: Build Docker Image
-      run: podman build -t your-podman-image .
-
-    - name: Push to EC2
-      run: |
-        scp -i your-ec2-key.pem your-podman-image.tar ec2-user@your-ec2-ip:/home/ec2-user/
-        ssh -i your-ec2-key.pem ec2-user@your-ec2-ip 'podman load -i /home/ec2-user/your-podman-image.tar && podman run -d -p 8080:80 your-podman-image'</code></pre>
-
-        <h2>Bước 4: Cấu hình EC2 Instance</h2>
-        <p>Đảm bảo rằng bạn đã cài đặt Podman trên EC2 và mở cổng 8080 trên Security Group:</p>
-        <pre><code>sudo yum -y update
-sudo yum -y install podman</code></pre>
-
-        <h2>Bước 5: Deploy ứng dụng</h2>
-        <p>Mỗi khi bạn đẩy code lên nhánh <code>main</code>, GitHub Actions sẽ tự động build image Podman và deploy lên EC2.</p>
-
-        <h2>Kết luận</h2>
-        <p>Bạn đã hoàn thành việc thiết lập CI/CD cho ứng dụng Podman với GitHub Actions và deploy lên EC2. Bây giờ mỗi khi bạn đẩy code, ứng dụng sẽ tự động được build và deploy.</p>
+        <h2 id="advanced-features">Advanced Features</h2>
+        <p>Podman includes many advanced features such as rootless containers, pods, and support for Kubernetes YAML. Refer to the <a href="https://podman.io" target="_blank">official documentation</a> for more details.</p>
     </div>
     <footer>
-        <p>&copy; 2024 Demo Podman CI/CD</p>
+        <p>&copy; 2024 Podman Knowledge. All rights reserved.</p>
     </footer>
 </body>
 </html>
