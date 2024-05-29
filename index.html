@@ -6,34 +6,47 @@
     <title>Demo Podman với CI/CD bằng GitHub Actions</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             line-height: 1.6;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #f0f2f5;
+            color: #1c1e21;
+        }
+        .navbar {
+            background-color: #4267b2;
+            padding: 10px 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar h1 {
+            margin: 0;
+            font-size: 24px;
         }
         .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
             padding: 20px;
             background: #fff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             border-radius: 10px;
-            margin-bottom: 50px;
         }
         h1, h2 {
-            color: #333;
+            color: #2e8b57;
         }
         pre {
             background: #333;
             color: #fff;
-            padding: 10px;
+            padding: 15px;
             overflow-x: auto;
             border-radius: 5px;
         }
         code {
-            color: #c7254e;
+            color: #d14;
             background-color: #f9f2f4;
             padding: 2px 4px;
             border-radius: 4px;
@@ -43,24 +56,14 @@
             padding: 0;
         }
         ul li {
-            background: #e2e2e2;
-            margin: 5px 0;
+            background: #f4f4f4;
+            margin: 10px 0;
             padding: 10px;
-            border-left: 5px solid #333;
+            border-left: 5px solid #2e8b57;
             border-radius: 5px;
         }
-        header {
-            background: #333;
-            color: #fff;
-            padding: 10px 0;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        header h1 {
-            margin: 0;
-        }
         footer {
-            background: #333;
+            background: #4267b2;
             color: #fff;
             text-align: center;
             padding: 10px 0;
@@ -76,9 +79,9 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>Demo Podman với CI/CD bằng GitHub Actions</h1>
-    </header>
+    <div class="navbar">
+        <h1>Demo Podman với CI/CD</h1>
+    </div>
     <div class="container">
         <p>Hướng dẫn này sẽ giúp bạn thiết lập CI/CD bằng GitHub Actions để deploy ứng dụng Podman trên EC2.</p>
         
