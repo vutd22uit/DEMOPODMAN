@@ -4,7 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo Podman với CI/CD bằng GitHub Actions</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 50px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        pre {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+        code {
+            color: #c7254e;
+            background-color: #f9f2f4;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            background: #e2e2e2;
+            margin: 5px 0;
+            padding: 10px;
+            border-left: 5px solid #333;
+            border-radius: 5px;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            margin: 0;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -18,18 +87,15 @@
 
         <h2>Bước 2: Viết Dockerfile cho ứng dụng Podman</h2>
         <p>Tạo file <code>Dockerfile</code> trong thư mục gốc của dự án:</p>
-        <pre>
-<code>FROM fedora:latest
+        <pre><code>FROM fedora:latest
 RUN dnf -y update && dnf -y install podman
 COPY . /app
 WORKDIR /app
-CMD ["podman", "run", "-p", "8080:80", "your-podman-image"]</code>
-        </pre>
+CMD ["podman", "run", "-p", "8080:80", "your-podman-image"]</code></pre>
 
         <h2>Bước 3: Tạo GitHub Actions Workflow</h2>
         <p>Tạo thư mục <code>.github/workflows</code> trong dự án của bạn và tạo file <code>ci-cd.yml</code> với nội dung sau:</p>
-        <pre>
-<code>name: CI/CD Pipeline
+        <pre><code>name: CI/CD Pipeline
 
 on:
   push:
@@ -55,15 +121,12 @@ jobs:
     - name: Push to EC2
       run: |
         scp -i your-ec2-key.pem your-podman-image.tar ec2-user@your-ec2-ip:/home/ec2-user/
-        ssh -i your-ec2-key.pem ec2-user@your-ec2-ip 'podman load -i /home/ec2-user/your-podman-image.tar && podman run -d -p 8080:80 your-podman-image'</code>
-        </pre>
+        ssh -i your-ec2-key.pem ec2-user@your-ec2-ip 'podman load -i /home/ec2-user/your-podman-image.tar && podman run -d -p 8080:80 your-podman-image'</code></pre>
 
         <h2>Bước 4: Cấu hình EC2 Instance</h2>
         <p>Đảm bảo rằng bạn đã cài đặt Podman trên EC2 và mở cổng 8080 trên Security Group:</p>
-        <pre>
-<code>sudo yum -y update
-sudo yum -y install podman</code>
-        </pre>
+        <pre><code>sudo yum -y update
+sudo yum -y install podman</code></pre>
 
         <h2>Bước 5: Deploy ứng dụng</h2>
         <p>Mỗi khi bạn đẩy code lên nhánh <code>main</code>, GitHub Actions sẽ tự động build image Podman và deploy lên EC2.</p>
