@@ -19,6 +19,7 @@
             padding: 20px;
             background: #fff;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
         }
         h1, h2 {
             color: #333;
@@ -28,6 +29,7 @@
             color: #fff;
             padding: 10px;
             overflow-x: auto;
+            border-radius: 5px;
         }
         code {
             color: #c7254e;
@@ -40,16 +42,38 @@
             padding: 0;
         }
         ul li {
-            background: #f4f4f4;
+            background: #e2e2e2;
             margin: 5px 0;
             padding: 10px;
-            border-left: 3px solid #333;
+            border-left: 5px solid #333;
+            border-radius: 5px;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            margin: 0;
+        }
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <header>
         <h1>Demo Podman với CI/CD bằng GitHub Actions</h1>
+    </header>
+    <div class="container">
         <p>Hướng dẫn này sẽ giúp bạn thiết lập CI/CD bằng GitHub Actions để deploy ứng dụng Podman trên EC2.</p>
         
         <h2>Bước 1: Thiết lập Repository trên GitHub</h2>
@@ -110,5 +134,8 @@ sudo yum -y install podman</code>
         <h2>Kết luận</h2>
         <p>Bạn đã hoàn thành việc thiết lập CI/CD cho ứng dụng Podman với GitHub Actions và deploy lên EC2. Bây giờ mỗi khi bạn đẩy code, ứng dụng sẽ tự động được build và deploy.</p>
     </div>
+    <footer>
+        <p>&copy; 2024 Demo Podman CI/CD</p>
+    </footer>
 </body>
 </html>
